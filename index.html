@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chengwei Liu | Alibaba QuarkAudio</title>
+
+  <!-- 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css">
+  
+  <style>
+    :root { --primary-color: #0056b3; --accent-color: #ff6600; --bg-gray: #f8f9fa; --text-dark: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; color: var(--text-dark); margin: 0; background: #fff; }
+    
+    /* 顶部导航 */
+    .masthead { position: fixed; width: 100%; top: 0; background: rgba(255,255,255,0.95); border-bottom: 1px solid #eee; z-index: 100; backdrop-filter: blur(5px); }
+    .masthead__inner { max-width: 1150px; margin: 0 auto; padding: 12px 20px; display: flex; gap: 25px; font-weight: 500; }
+    .masthead__inner a { text-decoration: none; color: #666; font-size: 0.95rem; }
+    .masthead__inner a:hover { color: var(--accent-color); }
+    
+    .wrapper { display: flex; max-width: 1150px; margin: 80px auto 0; padding: 20px; gap: 50px; }
+    
+    /* 侧边栏 */
+    .sidebar { flex: 0 0 280px; position: sticky; top: 100px; height: fit-content; }
+    .profile_box { border: 1px solid #eee; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .author__avatar { width: 190px; height: 190px; border-radius: 50%; object-fit: cover; border: 2px solid #f0f0f0; margin-bottom: 15px; }
+    .author__name { margin: 10px 0 5px; font-size: 1.6rem; font-weight: 700; }
+    .author__bio { font-size: 0.9rem; color: #666; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    
+    .author__urls { list-style: none; padding: 0; text-align: left; font-size: 0.9rem; }
+    .author__urls li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .author__urls a { color: #444; text-decoration: none; transition: 0.2s; }
+    .author__urls a:hover { color: var(--accent-color); }
+    .author__urls i { width: 18px; color: #666; }
+
+    /* 主内容 */
+    .main-content { flex: 1; }
+    h2.section-title { border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 45px; font-size: 1.7rem; }
+    
+    /* News Section */
+    .news-list { list-style: none; padding: 0; margin: 20px 0; }
+    .news-list li { margin-bottom: 12px; font-size: 0.95rem; padding-left: 15px; border-left: 3px solid #eee; }
+    .news-list li b { color: var(--accent-color); }
+
+    /* Highlights Section */
+    .highlights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+    .highlight-card { background: var(--bg-gray); padding: 15px; border-radius: 8px; font-size: 0.88rem; border: 1px solid #eee; line-height: 1.4; }
+    .highlight-card b { color: var(--primary-color); display: block; margin-bottom: 4px; }
+
+    /* 论文展示盒 */
+    .paper-box { display: flex; gap: 25px; margin-bottom: 45px; align-items: flex-start; }
+    .paper-box-image { flex: 0 0 320px; position: relative; }
+    .paper-box-image img { width: 100%; border-radius: 6px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+    .paper-box-image img:hover { transform: scale(1.02); }
+    
+    .paper-badge { position: absolute; top: -10px; left: -10px; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; color: #fff; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .badge-published { background: #2ecc71; }
+    .badge-working { background: var(--accent-color); }
+    .badge-tech { background: #9b59b6; }
+    
+    .paper-box-text { flex: 1; }
+    .paper-title { font-weight: 700; font-size: 1.15rem; color: var(--primary-color); margin-bottom: 8px; text-decoration: none; display: block; line-height: 1.3; }
+    .author-list { font-size: 0.95rem; color: #444; margin-bottom: 8px; }
+    .periodical { font-style: italic; color: #666; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+    .paper-desc { font-size: 0.9rem; color: #555; margin-bottom: 10px; }
+    
+    .shield-links { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+    .shield-links img { height: 20px; }
+
+    /* 时间轴 */
+    .timeline { position: relative; padding-left: 30px; margin: 25px 0; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: #eee; }
+    .timeline-item { position: relative; margin-bottom: 25px; display: flex; gap: 15px; align-items: flex-start; }
+    .timeline-item::before { content: ''; position: absolute; left: -35px; top: 6px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--primary-color); background: #fff; z-index: 2; }
+    .timeline-logo { flex: 0 0 50px; text-align: center; }
+    .timeline-logo img { width: 45px; height: 45px; object-fit: contain; border-radius: 6px; border: 1px solid #f0f0f0; }
+    .timeline-info { flex: 1; }
+    .timeline-time { font-size: 0.85rem; color: #888; margin-bottom: 3px; font-weight: bold; }
+    .timeline-desc { font-weight: 600; font-size: 1.05rem; color: #333; }
+    .timeline-desc span { font-weight: 400; color: #666; font-size: 0.95rem; }
+
+    /* 荣誉列表 */
+    .honors-list { list-style: none; padding: 0; margin: 20px 0; }
+    .honors-list li { margin-bottom: 12px; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+    .honors-list li .honor-name { font-weight: 500; }
+    .honors-list li .honor-time { color: #888; flex: 0 0 100px; text-align: right; font-family: monospace; }
+
+    @media (max-width: 900px) {
+      .wrapper { flex-direction: column; }
+      .sidebar { position: relative; width: 100%; top: 0; }
+      .paper-box { flex-direction: column; }
+      .paper-box-image { width: 100%; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .timeline-logo { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="masthead">
+    <div class="masthead__inner">
+      <a href="#about-me" style="color:var(--accent-color);">Homepage</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#working-papers">Working Papers</a>
+      <a href="#honors">Honors</a>
+      <a href="#experience">Experience</a>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+      <div class="profile_box">
+        <img src="https://via.placeholder.com/200" class="author__avatar" alt="Chengwei Liu">
+        <h3 class="author__name">Chengwei Liu</h3>
+        <p class="author__bio">Focusing on Audio, LLM.</p>
+        
+        <ul class="author__urls">
+          <li><i class="fas fa-fw fa-envelope"></i><a href="mailto:17863956352@163.com">Email</a></li>
+          <li><i class="fab fa-fw fa-github"></i><a href="https://github.com/alibaba/unified-audio">GitHub</a></li>
+          <li><i class="fas fa-fw fa-graduation-cap"></i><a href="https://scholar.google.com/citations?hl=zh-CN&tzom=-480&user=pClV7hcAAAAJ">Google Scholar</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="main-content">
+      <section id="about-me">
+        <p>I am a Senior Research Scientist in the <b>Alibaba QuarkAudio Team</b>. I lead the development of the <b>QuarkAudio</b> series, exploring a unified framework to handle different audio processing and generation tasks (speech, music, and general audio events).</p>
+        
+        <div class="highlights-grid">
+          <div class="highlight-card">
+              <b>🚀 Unified & Prompt-Free</b> Handles multiple tasks without explicit instruction.
+          </div>
+          <div class="highlight-card">
+              <b>⚙️ Decoder-only AR-LM Backbone</b> Leverages LLM-style autoregressive generation for speech token prediction.
+          </div>
+          <div class="highlight-card">
+              <b>🔄 End-to-End Compatible</b> Integrates WavLM/Hubert, H-Codec, and LM into one unified pipeline.
+          </div>
+          <div class="highlight-card">
+              <b>🌍 Multitask Support</b> SE, SR, TSE, SS, EDIT, VC, LASS, TTA, and more — all in a single model.
+          </div>
+        </div>
+      </section>
+
+      <!-- News Section -->
+      <h2 id="news" class="section-title">🔥 News</h2>
+      <ul class="news-list">
+        <li><b>2026.01</b>: 🎉 Our hybrid system paper is accepted to <b>ICASSP 2026</b>! We achieved <b>3rd place</b> in the <b>URGENT 2026 Challenge</b> (Track 1).</li>
+        <li><b>2025.12</b>: Released <b>QuarkAudio</b>, an Open-Source Project to Unify Audio Processing and Generation.</li>
+        <li><b>2025.10</b>: Released <b>UniTok-Audio</b>, supporting SOTA target speaker extraction and voice conversion.</li>
+        <li><b>2025.09</b>: Released <b>UniSE</b> foundation model for unified speech generation.</li>
+      </ul>
+
+      <!-- Selected Publications Section -->
+      <h2 id="publications" class="section-title">📝 Selected Publications</h2>
+
+      <!-- UniTok-Audio -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-published">arXiv 2025</div>
+          <img src="./figs/UNITOK-AUDIO.png" alt="UniTok-Audio">
+        </div>
+        <div class="paper-box-text">
+          <a href="https://arxiv.org/abs/2510.26372" class="paper-title">UniTok-Audio: A Unified Audio Generation Framework via Generative Modeling on Discrete Codec Tokens</a>
+          <div class="author-list"><strong>Chengwei Liu</strong>, Haoyin Yan, Shaofei Xue, Xiaotao Liang, Yinghao Liu, Zheng Xue, Gang Song, Boyang Zhou</div>
+          <span class="periodical">arXiv Preprint, 2025.</span>
+          <div class="paper-desc">A unified AR-LM framework that supports TSE, SE, SR, and Voice Conversion using semantic-acoustic decoupled tokens.</div>
+          <div class="shield-links">
+            <a href="https://arxiv.org/abs/2510.26372"><img src="https://img.shields.io/badge/Paper-ArXiv-red.svg"></a>
+            <a href="https://alibaba.github.io/unified-audio/"><img src="https://img.shields.io/badge/Demo-Page-blue.svg"></a>
+            <a href="https://github.com/alibaba/unified-audio"><img src="https://img.shields.io/badge/GitHub-Code-black.svg"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hybrid System / UniSE -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-published">ICASSP 2026</div>
+          <img src="./figs/Unise.png" alt="UniSE">
+        </div>
+        <div class="paper-box-text">
+          <a href="http://arxiv.org/abs/2601.19113" class="paper-title">A Hybrid Discriminative and Generative System for Universal Speech Enhancement</a>
+          <div class="author-list">Yinghao Liu, <strong>Chengwei Liu</strong>, Xiaotao Liang, Haoyin Yan, Shaofei Xue, Zheng Xue</div>
+          <span class="periodical">IEEE ICASSP 2026 / URGENT Challenge (Track 1) 3rd Place.</span>
+          <div class="paper-desc">Integrates WavLM/Hubert extractors and H-Codec into a pipeline for robust noise and reverb recovery.</div>
+          <div class="shield-links">
+            <a href="http://arxiv.org/abs/2601.19113"><img src="https://img.shields.io/badge/Paper-ArXiv-red.svg"></a>
+            <a href="https://github.com/alibaba/unified-audio/tree/main/QuarkAudio-UniSE"><img src="https://img.shields.io/badge/GitHub-UniSE-black.svg"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- QuarkAudio Technical Report -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-tech">Tech Report</div>
+          <img src="./figs/QuarkAudio.png" alt="QuarkAudio Report">
+        </div>
+        <div class="paper-box-text">
+          <a href="https://arxiv.org/abs/2512.20151" class="paper-title">QuarkAudio Technical Report: An Open-Source Project to Unify Audio Processing and Generation</a>
+          <div class="author-list"><strong>Chengwei Liu</strong>, Haoyin Yan, Shaofei Xue, Xiaotao Liang, Xiaofu Chen, Bin Gong, Zheng Xue, Gang Song</div>
+          <span class="periodical">Alibaba Technical Report, Dec 2025.</span>
+          <div class="paper-desc">Comprehensive details on backbones for multitask support including SE, SR, SS, VC, LASS, and more.</div>
+          <div class="shield-links">
+            <a href="https://arxiv.org/pdf/2512.20151"><img src="https://img.shields.io/badge/Paper-ArXiv-red.svg"></a>
+            <a href="https://github.com/alibaba/unified-audio"><img src="https://img.shields.io/badge/GitHub-Code-black.svg"></a>
+            <a href="https://huggingface.co/QuarkAudio/"><img src="https://img.shields.io/badge/Model-HF-yellow.svg"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Working Papers (INTERSPEECH 2026 Focus) -->
+      <h2 id="working-papers" class="section-title">🏗️ Working Papers</h2>
+
+      <!-- LMPAN -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-working">Submitted</div>
+          <img src="./figs/LMPAN_0211.png" alt="LMPAN">
+        </div>
+        <div class="paper-box-text">
+          <a class="paper-title">LMPAN: A Lightweight Multi-Path Alignment Network for Joint Full-Duplex Acoustic Echo Cancellation and Noise Suppression</a>
+          <div class="author-list"><strong>Chengwei Liu</strong>, Shaofei Xue<sup>#</sup>, Haoyin Yan, Xiaotao Liang, Zheng Xue</div>
+          <p style="font-size:0.9rem; color:#666;">A lightweight alignment network for full-duplex AEC and NS, optimized for real-time communication.</p>
+          <span class="periodical">INTERSPEECH 2026, <i>Submitted</i>.</span>
+        </div>
+      </div>
+
+      <!-- UniSE Working -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-working">Submitted</div>
+          <img src="./figs/UniSE_02.png" alt="UniSE AR">
+        </div>
+        <div class="paper-box-text">
+          <a class="paper-title">UniSE: A Unified Framework for Decoder-Only Autoregressive LM-Based Speech Enhancement</a>
+          <div class="author-list">Haoyin Yan*, <strong>Chengwei Liu</strong>*, Shaofei Xue<sup>#</sup>, Xiaotao Liang, Yuxiang Kong, Yinghao Liu, Zheng Xue</div>
+          <p style="font-size:0.9rem; color:#666;">A decoder-only AR-LM framework tailored for high-quality universal speech enhancement. (*Equal contribution, <sup>#</sup>Corresponding author)</p>
+          <span class="periodical">INTERSPEECH 2026, <i>Submitted</i>.</span>
+        </div>
+      </div>
+
+      <!-- QuarkAudio-Chat -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-working">Developing</div>
+          <img src="./figs/QuarkAudio-Chat.pdf" alt="QuarkAudio-Chat">
+        </div>
+        <div class="paper-box-text">
+          <a class="paper-title">QuarkAudio-Chat: Scaling Laws for Omnimodal Audio Understanding and Generation</a>
+          <div class="author-list"><strong>Chengwei Liu</strong>, et al.</div>
+          <p style="font-size:0.9rem; color:#666;">Exploring large-scale unified foundation models for seamless speech-audio-language integration.</p>
+        </div>
+      </div>
+
+      <!-- QuarkAudio-Edit -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-working">In Progress</div>
+          <img src="https://via.placeholder.com/600x340?text=QuarkAudio-Edit+CoT" alt="QuarkAudio-Edit">
+        </div>
+        <div class="paper-box-text">
+          <a class="paper-title">QuarkAudio-Edit: Decomposed CoT and Progressive Rewards for Language-Guided Audio Editing</a>
+          <div class="author-list"><strong>Chengwei Liu</strong>, et al.</div>
+          <p style="font-size:0.9rem; color:#666;">Developing a language-guided audio editing framework using Chain-of-Thought reasoning.</p>
+        </div>
+      </div>
+
+      <!-- Honors Section -->
+      <h2 id="honors" class="section-title">🎖 Honors and Awards</h2>
+      <ul class="honors-list">
+        <li><span class="honor-name">Outstanding graduate of Chinese Academy of Sciences (国科大) <b>(Top 5%)</b></span> <span class="honor-time">2022.07</span></li>
+        <li><span class="honor-name">National Scholarship (Master) <b></b></span> <span class="honor-time">2021.10</span></li>
+        <li><span class="honor-name">National Scholarship (Undergraduate) <b></b></span> <span class="honor-time">2018.10</span></li>
+        <li><span class="honor-name">National Mathematics Competition for College Students - <b>Second Prize</b></span> <span class="honor-time">2017.09</span></li>
+      </ul>
+
+      <!-- Experience Section -->
+      <h2 id="experience" class="section-title">💻 Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-logo"><img src="./figs/alibaba_logo.png" onerror="this.src='https://via.placeholder.com/50?text=Ali'" alt="Alibaba"></div>
+          <div class="timeline-info">
+            <div class="timeline-time">2024.07 - Present</div>
+            <p class="timeline-desc">Alibaba Group <span>- Senior Audio Algorithm Engineer</span></p>
+            <p style="font-size:0.9rem; color:#666; margin-top:5px;">Leading the open-source <b>QuarkAudio</b> project in QuarkAudio Lab.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-logo"><img src="./figs/horizon_logo.png" onerror="this.src='https://via.placeholder.com/50?text=HR'" alt="Horizon"></div>
+          <div class="timeline-info">
+            <div class="timeline-time">2022.07 - 2024.05</div>
+            <p class="timeline-desc">Horizon Robotics (地平线) <span>- Speech Algorithm Researcher</span></p>
+            <p style="font-size:0.9rem; color:#666; margin-top:5px;">On-device speech enhancement and hardware-aware audio algorithms.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education Section -->
+      <h2 id="education" class="section-title">🎓 Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-logo"><img src="./figs/ucas_logo.png" onerror="this.src='https://via.placeholder.com/50?text=UCAS'" alt="UCAS"></div>
+          <div class="timeline-info">
+            <div class="timeline-time">2019.09 - 2022.06</div>
+            <p class="timeline-desc">University of Chinese Academy of Sciences (国科大) <span>- M.S. in Acoustics</span></p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-logo"><img src="./figs/ouc_logo.png" onerror="this.src='https://via.placeholder.com/50?text=OUC'" alt="OUC"></div>
+          <div class="timeline-info">
+            <div class="timeline-time">2015.09 - 2019.06</div>
+            <p class="timeline-desc">Ocean University of China (中国海洋大学) <span>- B.S. in Marine Technology</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer style="text-align: center; padding: 60px 0 30px; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; margin-top: 50px;">
+    &copy; 2025 Chengwei Liu. Optimized for Academic Presentation.
+  </footer>
+</body>
+</html>
