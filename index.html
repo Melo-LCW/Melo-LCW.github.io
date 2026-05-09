@@ -724,7 +724,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="profile">
-        <img src="./figs/个人照片.jpg" class="avatar" alt="Chengwei Liu">
+        <img src="./figs/个人照片.jpg" class="avatar" alt="Chengwei Liu" onerror="this.style.display='none'; var p=this.parentElement; var d=document.createElement('div'); d.className='avatar'; d.style.cssText='width:190px;height:190px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:60px;font-weight:700;color:#fff;'; d.textContent='CL'; p.insertBefore(d,this);">
         <h2 class="profile-name">Chengwei Liu</h2>
         <p class="profile-title">Senior Research Scientist</p>
         <p class="profile-affiliation">Alibaba Group</p>
@@ -803,6 +803,7 @@
       <!-- News -->
       <h2 id="news" class="section-title"><i class="fas fa-fire" style="color:#e74c3c;font-size:1.1rem"></i> News</h2>
       <ul class="news-list">
+        <li><span class="news-date">2026.05</span> 🚀 We release <strong>HCodec-Spatial</strong>, a Spatial Audio Codec for Stereo Encoding and Mono-to-Stereo Spatialization. <a href="https://github.com/alibaba/unified-audio/tree/main/QuarkAudio-HCodec/HCodec-spatial/" target="_blank"><i class="fab fa-github"></i> Code</a></li>
         <li><span class="news-date">2026.05</span> 🚀 Will open-source <strong>QuarkAudio-Chat</strong>, an end-to-end spoken dialogue large model for seamless speech-audio-language interaction.</li>
         <li><span class="news-date">2026.05</span> 🚀 Will open-source <strong>QuarkAudio-Hcodec3.0</strong>, a next-generation neural audio codec with performance surpassing <strong>MOSS-Audio-Tokenizer</strong>.</li>
         <li><span class="news-date">2026.01</span> 🎉 Our hybrid system paper is accepted to <strong>ICASSP 2026</strong>! We achieved <strong>3rd place</strong> in the <strong>URGENT 2026 Challenge</strong> (Track 1).</li>
@@ -872,6 +873,24 @@
 
       <!-- Working Papers -->
       <h2 id="working-papers" class="section-title"><i class="fas fa-flask" style="font-size:1.1rem"></i> Working Papers</h2>
+
+      <!-- Discrete Token Modeling MSS -->
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="paper-badge badge-working">Submitted</div>
+          <img src="./figs/UNITOK-AUDIO.png" alt="Discrete Token Modeling MSS">
+        </div>
+        <div class="paper-box-text">
+          <span class="paper-title">Discrete Token Modeling for Multi-Stem Music Source Separation with Language Models</span>
+          <div class="author-list"><strong>Chengwei Liu</strong>, et al.</div>
+          <span class="periodical">Submitted, 2025.</span>
+          <div class="paper-desc">Discrete token modeling approach for multi-stem music source separation using language model architectures.</div>
+          <div class="shield-links">
+            <a href="https://arxiv.org/pdf/2604.09371" target="_blank"><img src="https://img.shields.io/badge/Paper-ArXiv-red.svg" alt="Paper"></a>
+            <a href="https://anonymous.4open.science/w/mss-demo-page-2F80/" target="_blank"><img src="https://img.shields.io/badge/Demo-Page-blue.svg" alt="Demo"></a>
+          </div>
+        </div>
+      </div>
 
       <!-- LMPAN -->
       <div class="paper-box">
@@ -1101,3 +1120,4 @@
   </script>
 </body>
 </html>
+
